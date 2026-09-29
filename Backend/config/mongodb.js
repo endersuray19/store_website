@@ -1,11 +1,10 @@
 import mongoose from "mongoose";
 
-const connectDB = async () => {
-
+const connectDB = async()=>{
     mongoose.connection.on('connected',()=>{
-        console.log("DB Connected")
-    })
-
-    await mongoose.connect(`${process.env.MONGODB_URL}/Cluster0`)
+        console.log("DB Conected");
+    });
+    await
+    mongoose.connect(`${process.env.MONGODB_URL}/website_store`);
 }
 export default connectDB
