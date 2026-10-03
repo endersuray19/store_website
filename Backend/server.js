@@ -4,6 +4,7 @@ import cors from 'cors'
 import connectDB from './config/mongodb.js'
 import connectCloudinary from './config/cloudinary.js'
 import userRouter from "./routes/userRoute.js"
+import productRoute from './routes/productRoute.js'
 
 
 //App Config
@@ -19,6 +20,7 @@ app.use(cors())
 
 // api endpoint
 app.use('/api/user',userRouter)
+app.use('/api/product',productRoute)
 
 app.get('/',(req,res)=>{
     res.send("API Success")
