@@ -49,7 +49,28 @@ const registerUser = async(req,res)=>{
     }
 }
 const adminLogin = async(req,res)=>{
+    const {email,password} = req.body
 
+    const admin = await userModel.findOne({email})
+
+    try{
+        if(!admin){
+            res.json({success:false,message:"User does'nt exit!"})
+        }
+        else{
+            const isMatch = await bycrpt.compare(password,admin.password)
+            if(isMatch){
+                const token = createToken(admin._id)
+
+                return res.json({success:true,token})
+            }
+            else{
+                return res.json({success:false,message:"Invalid Password!"})
+            }
+        }
+    }catch(error){
+        return res.json({success:false,message:error.message})
+    }
 }
 
 export {loginUser,registerUser,adminLogin}
